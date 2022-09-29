@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Nos amis les animaux</title>
+    <link rel="stylesheet" href="./public/assets/css/style.css">
+    <link rel="shortcut icon" type="image/ico" href="./public/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <div class="icon-text-flex">
+                        <a href="index.php" class="nav-icon">
+                            <i class="fa-solid fa-house test"></i>
+                        </a>
+                        <span>Accueil</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="icon-text-flex">
+                        <a href="animal_abuse.php" class="nav-icon">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                        </a>
+                        <span>Signaler</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="icon-text-flex">
+                        <a href="contact.php" class="nav-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </a>
+                        <div class="icon-on-hover">
+                            <span>Contact</span>
+                        </div>
+                    </div>
+                </li>
+                <?php if (Session::isConnected() && $_SESSION['auth']['role']) :; ?>
+                    <li>
+                        <div class="icon-text-flex">
+                            <a href="dashboard.php" class="nav-icon">
+                                <i class="fa-solid fa-user-secret"></i>
+                            </a>
+                            <span>Admin</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon-text-flex">
+                            <a href="add_animal.php" class="nav-icon">
+                                <i class="fa-solid fa-plus"></i><i class="fa-solid fa-paw"></i>
+                            </a>
+                            <span>Ajouter Animal</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon-text-flex">
+                            <a href="add_post.php" class="nav-icon">
+                                <i class="fa-solid fa-plus"></i><i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <span>Ajouter Article</span>
+                        </div>
+                    </li>
+                <?php endif; ?>
+                <?php if (Session::isConnected() && $_SESSION['auth']) : ?>
+                    <li>
+                        <div class="icon-text-flex">
+                            <a href="logout.php" class="nav-icon">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                            </a>
+                            <span>Deconnexion</span>
+                        </div>
+                    </li>
+                <?php else : ?>
+                    <li>
+                        <div class="icon-text-flex">
+                            <a href="login.php" class="nav-icon">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                            </a>
+                            <span>Connexion</span>
+                        </div>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+        <?php if (Session::isConnected() && $_SESSION['auth']) : ?>
+            <div class="welcome-text">
+                <span class="connected"><?= 'Bonjour ' . $_SESSION['auth']['firstname'] . ', bienvenue !' ?></span>
+            </div>
+        <?php endif; ?>
+    </header>
+
+    <main>
+        <?= $pageContent ?>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Krystel Developer</h3>
+            <ul class="socials">
+                <li><a href="https://www.facebook.com/spaofficiel/" target="blank" title="Facebook"><i class="fa-brands fa-facebook-f fa-xl"></i></a></li>
+                <li><a href="https://twitter.com/SPA_Officiel" target="blank" title="twitter"><i class="fa-brands fa-twitter fa-xl"></i></a></li>
+                <li><a href="https://www.instagram.com/la_spa/?hl=fr" target="blank" title="Instagram"><i class="fa-brands fa-instagram fa-xl"></i></a></li>
+                <li><a href="https://www.youtube.com/channel/UCHIbj4gZgIXThXRqeCMStrg" target="blank" title="Youtube"><i class="fa-brands fa-youtube fa-xl"></i></a></li>
+                <li><a href="https://www.linkedin.com/company/la-spa/?originalSubdomain=fr" target="blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in 5x"></i></a></li>
+            </ul>
+            <p>Thiebaut Krystel - Copyright 2022</p>
+        </div>
+    </footer>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./public/assets/js/main.js"></script>
+    <script src="./public/assets/js/localStorage.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
+    <!-- Script JS -->
+    <script type="module" src="public/assets/js/favorite.js"></script>
+    <script type="module" src="public/assets/js/localStorage.js"></script>
+    <script type="module" src="public/assets/js/event.js"></script>
+    <script type="module" src="public/assets/js/storage.js"></script>
+</body>
+
+</html>

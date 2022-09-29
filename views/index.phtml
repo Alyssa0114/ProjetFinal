@@ -1,0 +1,61 @@
+<div class="banner_image">
+    <img class="banner_img_dog" src="./public/assets/images/dog-banner.png" alt="bannière dobermann">
+    <p>Découvrez le film de sensibilisation de la Société Protectrice des Animaux <a href="https://lp.la-spa.fr/stopabandon/?reserved_code_media=W22PG012F&utm_medium=mainbloc&utm_campaign=Abandon22&utm_source=site" target="_blank">juste ici</a></p>
+</div>
+
+<section>
+    <h2>Nous avons <?= $countAnimals ?> animaux à l'adoption !</h2>
+    <div class="container-animals">
+        <?php foreach ($animals as $animal) : ?>
+            <article class="animals-article">
+                <div class="content-animals">
+                    <h3><?= $animal['name']; ?></h3>
+                </div>
+                <div class="animals-img-container">
+                    <img class="animals-img" src="<?= strtok($animal["files"], ',') ?>" alt="<?= $animal['name']; ?>" />
+                </div>
+                <div class="content-animals">
+                    <p>Sexe : <?= $animal['sex']; ?></p>
+                </div>
+                <div class="content-animals">
+                    <p>Refuge : <?= $animal['refuge']; ?></p>
+                </div>
+                <div class="content-animals">
+                    <a href="favorite.php" class="addfavorite" data-id="<?= $animal["id"]; ?>" data-file="<?= strtok($animal["files"], ',') ?>" data-animal_name="<?= $animal["name"]; ?>" data-sex="<?= $animal["sex"]; ?>">Favoris</a>
+                </div>
+            </article>
+        <?php endforeach ?>
+    </div>
+</section>
+
+<div>
+    <h2>Si vous êtes intéressé(s) par l'un de nos animaux, contactez nous <a href="contact.php" target="blank">juste ici</a></h2>
+    <p>Attention ! Une adoption est une démarche à ne pas prendre à la légère !</p>
+</div>
+
+<div class="banner_image">
+    <img class="banner_img_cat" src="./public/assets/images/cat-banner.png" alt="bannière chat">
+</div>
+
+<div class="banner_content_articles">
+    <p>Lutter contre l'abandon, renseignez-vous <a href="https://www.la-spa.fr/missions/les-actions-de-la-spa/defendre-les-animaux/lutter-contre-labandon/" target="blank" class="important">ici</a></p>
+</div>
+
+<section>
+    <h2>Nous avons <?= $countPosts ?> articles à lire pour vous !</h2>
+    <div class="container-articles">
+        <?php foreach ($posts as $post) : ?>
+            <article class="posts-article">
+                <div class="content-animals">
+                    <h3 class="title-animals"><?= $post['created_at']; ?></h3>
+                </div>
+                <div class="content-animals">
+                    <p>Titre : <?= $post['title']; ?></p>
+                </div>
+                <div class="content-animals">
+                    <p>Contenu : <?= $post['content']; ?></p>
+                </div>
+            </article>
+        <?php endforeach ?>
+    </div>
+</section>

@@ -1,0 +1,188 @@
+<?php if (Session::isConnected() && $_SESSION['auth']['role']) :; ?>
+    <h1 class="title-content">Admin Pannel</h1>
+    <!-- <div class="flex-container-admin"> -->
+    <section>
+        <div class="big-title-admin">
+            <h2>Articles</h2>
+        </div>
+        <?php foreach ($posts as $post) : ?>
+            <div class="dashboard-container">
+                <div>Titre : <?= $post['title']; ?></div>
+            </div>
+            <div class="dashboard-container">
+                <div><?= $post['content']; ?></div>
+            </div>
+            <div class="dashboard-container">
+                <div><?= $post['created_at']; ?></div>
+            </div>
+            <hr>
+        <?php endforeach; ?>
+        <h3 class="title-admin">Total : <?= $countPosts ?> articles</h3>
+    </section>
+
+    <section>
+        <div class="big-title-admin">
+            <h2>Contact</h2>
+        </div>
+        <?php foreach ($contacts as $contact) : ?>
+            <div class="dashboard-container">
+                Nom : <?= htmlspecialchars($contact['name']); ?>
+            </div>
+            <div class="dashboard-container">
+                Email : <?= htmlspecialchars($contact['mail']); ?>
+            </div>
+            <div class="dashboard-container">
+                Tél : <?= htmlspecialchars($contact['phone']); ?>
+            </div>
+            <div class="dashboard-container">
+                Objet : <?= htmlspecialchars($contact['subject']); ?>
+            </div>
+            <div class="dashboard-container">
+                <?= htmlspecialchars($contact['content']); ?>
+            </div>
+            <div class="dashboard-container">
+                <?= htmlspecialchars($contact['created_at']); ?>
+            </div>
+            <hr>
+        <?php endforeach; ?>
+        <h3 class="title-admin">Total : <?= $counts ?> messages</h3>
+    </section>
+
+    <section>
+        <div class="big-title-admin">
+            <h2>Utilisateurs</h2>
+        </div>
+        <?php foreach ($users as $user) : ?>
+            <div class="dashboard-container">
+                Prénom : <?= htmlspecialchars($user['firstname']); ?>
+            </div>
+            <div class="dashboard-container">
+                Nom : <?= htmlspecialchars($user['lastname']); ?>
+            </div>
+            <div class="dashboard-container">
+                Email : <?= htmlspecialchars($user['mail']); ?>
+            </div>
+            <div class="dashboard-delete">
+                <a href="delete-user.php?id=<?= intval($user['id']); ?>" class="btn-delete">Supprimer</a>
+            </div>
+            <hr>
+        <?php endforeach; ?>
+        <h3 class="title-admin">Total : <?= $countUsers ?> utilisateurs</h3>
+    </section>
+
+    <section>
+        <div class="big-title-admin">
+            <h2>Animaux</h2>
+        </div>
+        <div class="container-animals">
+            <?php foreach ($allAnimalsInfo as $animal) : ?>
+                <article class="animals-article">
+                    <div class="content-animals">
+                        <h3><?= $animal['name']; ?></h3>
+                    </div>
+                    <div class="animals-img-container">
+                        <img class="animals-img" src="<?= strtok($animal["files"], ',') ?>" alt="<?= $animal['name']; ?>" />
+                    </div>
+                    <div class="content-animals">
+                        <p>Sexe : <?= $animal['sex']; ?></p>
+                    </div>
+                    <div class="content-animals">
+                        <p>Refuge : <?= $animal['refuge']; ?></p>
+                    </div>
+                </article>
+            <?php endforeach ?>
+        </div>
+        <h3 class="title-admin">Total : <?= $countAnimals ?> animaux</h3>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col">
+                <div class="big-title-admin">
+                    <h2>Espèces</h2>
+                </div>
+                <table>
+                    <tbody>
+                        <?php foreach ($species as $specie) : ?>
+                            <tr>
+                                <td>
+                                    <?= htmlspecialchars($specie['name']); ?>
+                                </td>
+                                <td>
+                                    <a href="delete-specie.php?id=<?= intval($specie['id']); ?>" class="btn-delete">Supprimer</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <h3 class="title-admin">Total : <?= $countSpecies ?> espèces</h3>
+            </div>
+
+            <div class="col">
+                <div class="big-title-admin">
+                    <h2>Races</h2>
+                </div>
+                <table>
+                    <tbody>
+                        <?php foreach ($races as $element) : ?>
+                            <tr>
+                                <td>
+                                    <?= htmlspecialchars($element['race']); ?>
+                                </td>
+                                <td>
+                                    <a href="delete-race.php?id=<?= intval($element['id']); ?>" class="btn-delete">Supprimer</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <h3 class="title-admin">Total : <?= $countRaces ?> races</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="big-title-admin">
+                    <h2>Ajout d'une espèce</h2>
+                </div>
+                <?php foreach ($species as $element) : ?>
+                    <div class="species-container-flex">
+                        <ul>
+                            <li><?= htmlspecialchars($element['name']); ?></li>
+                        </ul>
+                    </div>
+                <?php endforeach ?>
+                <form method="POST" action="dashboard.php">
+                    <label for="name">
+                        <span>Ajouter une espèce</span>
+                        <input type="text" name="name" id="name" value="" />
+                    </label>
+                    <input type="submit" value="Ajouter" name="specieData">
+                </form>
+            </div>
+
+            <div class="col">
+                <div class="big-title-admin">
+                    <h2>Ajout d'une race</h2>
+                </div>
+                <?php foreach ($races as $element) : ?>
+                    <div class="species-container-flex">
+                        <ul>
+                            <li><?= htmlspecialchars($element['race']); ?></li>
+                        </ul>
+                    </div>
+                <?php endforeach ?>
+                <form action="dashboard.php" method="post">
+                    <label for="race">
+                        <span>Ajouter une race</span>
+                        <input type="text" name="race" id="race" />
+                    </label>
+                    <input type="submit" value="Ajouter" name="raceData">
+                </form>
+            </div>
+        </div>
+    </section>
+
+<?php elseif (Session::isConnected() && !$_SESSION['auth']['role']) : ?>
+    <?= $_SESSION['error'] = 'Restricted'; ?>
+<?php endif; ?>
